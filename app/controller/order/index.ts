@@ -1,5 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import Pizza from '../../model/pizza';
+import Order from '../../model/order';
 
 
 let api = Router();
@@ -10,6 +11,7 @@ let api = Router();
  * 
 */
 api.post("/", async(req: Request, res: Response, next: NextFunction) => {
+    const order = new Order(req.body);
     try {
         const pizza_id = req.body.pizza;
         const order_quantity = req.body.quantity;
@@ -24,10 +26,10 @@ api.post("/", async(req: Request, res: Response, next: NextFunction) => {
         } else if(order_price > 100) {
             order_price = order_price - (order_price * 0.1);
         };
-        await pizza.save();
+        await order.save();
 
         res.status(200).json({
-            data: pizza,
+            data: order,
             message: "order successful",
             success: true,
             amount: order_price
@@ -35,8 +37,15 @@ api.post("/", async(req: Request, res: Response, next: NextFunction) => {
         });
         next();
     } catch(error) {
-        console.log(error);
+        return res.status(400).json({
+            message: error
+        })
     }
+});
+
+api.get("/", async(req: Request, res: Response, next: NextFunction) => {
+    const order = await Order.find();
+    res.status(200).json({order});
 });
 
 

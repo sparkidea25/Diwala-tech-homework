@@ -13,7 +13,7 @@ api.post("/", async(req: Request, res: Response) => {
     res.status(200).json({pizza});
 } );
 
-api.get("/get-pizza", async(req: Request, res: Response) => {
+api.get("/", async(req: Request, res: Response) => {
     const pizza = await Pizza.find();
     res.status(200).json({pizza});
 });
