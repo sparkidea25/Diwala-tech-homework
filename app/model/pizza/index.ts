@@ -1,4 +1,4 @@
-const mongoose = require('mongooseq');
+const mongoose = require('mongoose');
 
 const Pizza = mongoose.Schema({
     name: {

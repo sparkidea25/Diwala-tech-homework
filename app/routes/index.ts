@@ -2,7 +2,9 @@ import express from "express";
 import initializeDb from "../config/db";
 import user from "../controller/user";
 import auth from "../controller/auth";
-import {handleUnauthorizedError} from "../middleware/auth";
+import pizza from "../controller/pizza";
+import order from "../controller/order";
+import {AuthVerify, handleUnauthorizedError} from "../middleware/auth";
 import {Middleware} from "Diwala";
 
 let router = express();
@@ -21,6 +23,8 @@ const handleUnhandledError: Middleware = (
 initializeDb();
 router.use('/user', user);
 router.use('/auth', auth);
+router.use('/pizza', AuthVerify, pizza);
+router.use('/order', AuthVerify, order);
 router.use(handleUnauthorizedError);
 router.use(handleUnhandledError);
 
