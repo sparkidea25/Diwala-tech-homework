@@ -1,9 +1,10 @@
-import express, { Router } from "express";
+import express from "express";
 import initializeDb from "../config/db";
 import user from "../controller/user";
 import auth from "../controller/auth";
-import {AuthVerify, handleUnauthorizedError} from "../middleware/auth";
+import {handleUnauthorizedError} from "../middleware/auth";
 import {Middleware} from "Diwala";
+
 let router = express();
 
 const handleUnhandledError: Middleware = (
