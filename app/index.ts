@@ -7,6 +7,7 @@ const { combine, timestamp, colorize, printf } = winstonFormat;
 const expressWinston = require("express-winston");
 const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
+import routes from './routes';
 import setupLogger from './config/logger';
 const logger = setupLogger('app');
 
@@ -40,6 +41,8 @@ app.use(
     })
 );
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,6 +56,8 @@ passport.use(
       User.authenticate()
     )
   );
+
+  app.use("/v1", routes);
 
 
 let port = process.env.PORT || 3000;

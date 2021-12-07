@@ -17,9 +17,6 @@ export const AuthVerify = expressJwt({
   issuer: ISSUER,
 });
 
-interface Error {
-  name: string;
-}
 
 export const handleUnauthorizedError: Middleware = (err, _req, res, next) => {
   if (err.name === "UnauthorizedError") {
