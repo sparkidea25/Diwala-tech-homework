@@ -1,16 +1,17 @@
-import {Router, Request, Response, NextFunction} from 'express';
+import {Request, Response, NextFunction} from 'express';
 import Pizza from '../../model/pizza';
 import Order from '../../model/order';
 
 
-let api = Router();
+// let api = Router();
 
 
 /** api to order for Pizza, to multiply the Quantity of Pizza type they want and the Price
  * 5% discount when the order_price is above 50, and 10% discount when order_price is above 100
  * 
 */
-api.post("/", async(req: Request, res: Response, next: NextFunction) => {
+
+export const createOrder = async (req: Request, res: Response, next: NextFunction) => {
     const order = new Order(req.body);
     try {
         const pizza_id = req.body.pizza;
@@ -41,14 +42,30 @@ api.post("/", async(req: Request, res: Response, next: NextFunction) => {
             message: error
         })
     }
-});
+};
 
-api.get("/", async(req: Request, res: Response, next: NextFunction) => {
+
+
+export const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.find();
     res.status(200).json({order});
-});
+};
+
+export const getOrderById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const order = await Order.findOne({_id:req.params.id});
+        // console.log(order);
+    return res.status(200).json(order);
+    }catch(error) {
+        return res.status(400).json({
+            message: error
+        })
+    }
+};
 
 
 
-export default api;
+
+
+
 
