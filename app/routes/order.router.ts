@@ -19,8 +19,8 @@ const handleUnhandledError: Middleware = (
 
 initializeDb();
 orderRouter.post('/order', AuthVerify, Order.createOrder)
-orderRouter.get('/get-order', AuthVerify, Order.getAllOrders)
-orderRouter.get('/get-order-by-id/:id', AuthVerify, Order.getOrderById)
+orderRouter.get('/order', AuthVerify, Order.getAllOrders)
+orderRouter.get('/order/:id', AuthVerify, Order.getOrderById)
 orderRouter.use(handleUnauthorizedError);
 orderRouter.use(handleUnhandledError);
 
