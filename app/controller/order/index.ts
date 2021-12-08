@@ -1,6 +1,8 @@
 import {Request, Response, NextFunction} from 'express';
 import Pizza from '../../model/pizza';
 import Order from '../../model/order';
+import setupLogger from '../../config/logger';
+const logger = setupLogger('order');
 
 
 // let api = Router();
@@ -33,7 +35,8 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
         },
         });
         next();
-    } catch(error) {
+    } catch(error: any) {
+        logger.error(error);
         return res.status(400).json({
             message: error
         })
@@ -53,6 +56,7 @@ export const getOrderById = async (req: Request, res: Response, next: NextFuncti
         const order = await Order.findOne({_id:req.params.id});
     return res.status(200).json(order);
     }catch(error) {
+        logger.error(error);
         return res.status(400).json({
             message: error
         })

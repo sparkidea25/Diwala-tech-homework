@@ -1,5 +1,7 @@
 import {Request, Response} from 'express';
 import Pizza from "../../model/pizza";
+import setupLogger from '../../config/logger';
+const logger = setupLogger('order');
 
 
 
@@ -21,6 +23,7 @@ export const getPizzas = async (req: Request, res: Response) => {
         const pizza = await Pizza.find();
         return res.status(200).json(pizza);
     } catch (error) {
+        logger.error(error);
         return res.status(400).json({message: error});
     }
 };
@@ -31,6 +34,7 @@ export const getPizzabyId = async (req: Request, res: Response) => {
         const pizza = await Pizza.findOne({_id: req.params.id});
         return res.status(200).json(pizza);
     } catch(error) {
+        logger.error(error);
         return res.status(404).json({message: error});
     }
 }
