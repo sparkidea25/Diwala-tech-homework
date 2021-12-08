@@ -7,7 +7,9 @@ const { combine, timestamp, colorize, printf } = winstonFormat;
 const expressWinston = require("express-winston");
 const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
-import routes from './routes';
+import userRoute from './routes/user.router';
+import pizzaRoute from './routes/pizza.router';
+import orderRoute from './routes/order.router';
 import setupLogger from './config/logger';
 const logger = setupLogger('app');
 
@@ -57,12 +59,14 @@ passport.use(
     )
   );
 
-  app.use("/v1", routes);
+  app.use("/v1", userRoute);
+  app.use("/v1", pizzaRoute);
+  app.use("/v1", orderRoute);
 
 
 let port = process.env.PORT || 3000;
 
 
 app.listen(port, () => {
-    logger.info(`Server started on port ${port}`);
+    logger.info(`⚡️[Server] started on port ${port}`);
 })
