@@ -18,7 +18,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     try {
         const pizza_id = req.body.pizza;
         const order_quantity = req.body.quantity;
-        const pizza = await Pizza.findOne({_id:pizza_id});
+        const pizza = await Pizza.findOne({_id:pizza_id})
         let order_price = order_quantity * pizza.price;
         if(order_price > 50) {
             order_price = order_price - (order_price * 0.05);
@@ -26,13 +26,14 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
             order_price = order_price - (order_price * 0.1);
         };
         // let amount = order_price;
+        order.amount = order_price;
         await order.save();
+        const findCreatedOrder = await Order.findOne({_id: order.id}).populate('pizza');
+        let saveCreatedOrder = await findCreatedOrder.save();
          res.status(200).json({
-            data: {order,
+            order: saveCreatedOrder,
             message: "order successful",
             success: true,
-            amount: order_price
-        },
         });
         next();
     } catch(error: any) {

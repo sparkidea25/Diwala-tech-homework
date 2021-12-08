@@ -9,6 +9,7 @@ const OrderSchema = new mongoose.Schema({
     pizza: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Pizza",
+        autopopulate: true,
         required: true,
     },
     amount: {

@@ -18,9 +18,9 @@ const handleUnhandledError: Middleware = (
   };
 
 initializeDb();
-pizzaRouter.post('/pizza', AuthVerify, Pizza.createPizza)
-pizzaRouter.get('/pizza', Pizza.getPizzas)
-pizzaRouter.get('/pizza/:id', Pizza.getPizzabyId)
+pizzaRouter.post('/pizza', AuthVerify, Pizza.createPizza);
+pizzaRouter.get('/pizza', Pizza.getPizzas);
+pizzaRouter.get('/pizza/:id', Pizza.getPizzabyId);
 pizzaRouter.use(handleUnauthorizedError);
 pizzaRouter.use(handleUnhandledError);
 

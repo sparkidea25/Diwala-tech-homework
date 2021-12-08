@@ -12,8 +12,7 @@ const userSchema = new Schema({
     }, 
     username: {
         type: String
-    } ,
-      __v: { type: Number, select: false },
+    }
 });
 
 export const MIN_LENGTH = 6;
