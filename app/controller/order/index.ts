@@ -19,9 +19,7 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 
         const pizza = await Pizza.findOne({_id:pizza_id});
 
-        // console.log(pizza);
         let order_price = order_quantity * pizza.price;
-        // console.log(order_price);
         if(order_price > 50) {
             order_price = order_price - (order_price * 0.05);
         } else if(order_price > 100) {
@@ -45,16 +43,16 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
 };
 
 
-
+/** APi to get all orders */
 export const getAllOrders = async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.find();
     res.status(200).json({order});
 };
 
+/** APi to get a single order passing an ID */
 export const getOrderById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const order = await Order.findOne({_id:req.params.id});
-        // console.log(order);
     return res.status(200).json(order);
     }catch(error) {
         return res.status(400).json({
