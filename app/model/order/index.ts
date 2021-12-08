@@ -10,6 +10,9 @@ const OrderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Pizza",
         required: true,
+    },
+    amount: {
+        type: Number
     }
 });
 

@@ -17,8 +17,12 @@ export const createPizza = async (req: Request, res: Response) => {
 
 /** APi to Get all Pizza */
 export const getPizzas = async (req: Request, res: Response) => {
-    const pizza = await Pizza.find();
-    return res.status(200).json(pizza);
+    try {
+        const pizza = await Pizza.find();
+        return res.status(200).json(pizza);
+    } catch (error) {
+        return res.status(400).json({message: error});
+    }
 };
 
 /** APi to Get Pizza by ID */
@@ -27,7 +31,7 @@ export const getPizzabyId = async (req: Request, res: Response) => {
         const pizza = await Pizza.findOne({_id: req.params.id});
         return res.status(200).json(pizza);
     } catch(error) {
-        res.status(404).json({message: error});
+        return res.status(404).json({message: error});
     }
 }
 

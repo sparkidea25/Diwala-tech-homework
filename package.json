@@ -12,6 +12,13 @@
   "author": "sparkidea25 <michaeldaralola123@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "@types/express-winston": "^4.0.0",
     "@types/passport": "^1.0.7",
     "cors": "^2.8.5",
